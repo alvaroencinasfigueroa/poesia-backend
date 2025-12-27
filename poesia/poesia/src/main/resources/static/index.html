@@ -33,7 +33,7 @@
             background-image: linear-gradient(to bottom, #fffbfd 0%, #fff5f8 100%);
         }
 
-        /* HEADER ACTUALIZADO */
+        /* HEADER */
         header {
             padding: 2rem 5%;
             display: flex;
@@ -47,6 +47,7 @@
             font-weight: 700;
             color: var(--accent-color);
             text-decoration: none;
+            cursor: pointer;
         }
 
         .nav-actions {
@@ -127,7 +128,7 @@
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 245, 248, 0.97); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.4s ease; }
         .modal-overlay.open { opacity: 1; visibility: visible; }
         .modal-content { background: #fff; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; padding: 3rem; box-shadow: 0 25px 70px rgba(214, 124, 147, 0.2); position: relative; text-align: center; border-radius: 16px; border: 1px solid var(--card-border); }
-        .modal-content.wide { max-width: 700px; padding: 4rem; } /* Para lectura */
+        .modal-content.wide { max-width: 700px; padding: 4rem; }
 
         .close-modal { position: absolute; top: 20px; right: 25px; font-size: 2rem; cursor: pointer; background: none; border: none; color: var(--accent-color); }
         .modal-title { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-color); }
@@ -148,7 +149,7 @@
 <body>
 
 <header>
-    <a href="#" class="logo" onclick="renderPoems()"><i class="fas fa-feather-alt"></i> Anthology.</a>
+    <div class="logo" onclick="renderPoems()"> <i class="fas fa-feather-alt"></i> Anthology.</div>
 
     <div class="nav-actions" id="navActions">
     </div>
@@ -242,12 +243,16 @@
 </div>
 
 <script>
-    // --- VARIABLES GLOBALES ---
+    // --- CONFIGURACIÓN ---
     const API_POEMAS = "http://localhost:8080/api/poesias";
     const API_AUTH = "http://localhost:8080/api/auth";
 
+    // ⚠️ ¡¡CAMBIA ESTO POR TU EMAIL REAL!! ⚠️
+    // Solo este email verá el botón de "Escribir"
+    const ADMIN_EMAIL = "alvaro19aef@gmail.com";
+
     let poems = [];
-    let currentUser = null; // Aquí guardamos al usuario si se loguea
+    let currentUser = null;
 
     // --- FUNCIONES DE AUTENTICACIÓN ---
 
@@ -288,20 +293,23 @@
                 body: JSON.stringify(credenciales)
             });
 
-            // Si el backend devuelve un usuario (no está vacío)
             const usuario = await res.json();
 
             if(usuario && usuario.id) {
                 currentUser = usuario;
                 closeModal('loginModal');
                 updateUI();
-                alert(`¡Bienvenido, ${currentUser.nombre}!`);
+                // Mensaje personalizado si eres tú
+                if(currentUser.email === ADMIN_EMAIL){
+                    alert(`¡Bienvenido Poeta! 🖋️`);
+                } else {
+                    alert(`¡Bienvenido, ${currentUser.nombre}!`);
+                }
             } else {
                 alert("Email o contraseña incorrectos.");
             }
         } catch(err) {
             console.error(err);
-            // En caso de que el backend devuelva vacío y falle el json parse
             alert("Credenciales incorrectas.");
         }
     }
@@ -314,28 +322,38 @@
 
     function upgradeUser() {
         if(!currentUser) return;
-        // Simulación de pago
         if(confirm(`Hola ${currentUser.nombre}, ¿quieres pagar $5 USD para ser Premium?`)) {
-            currentUser.premium = true; // Actualizamos localmente para ver el efecto inmediato
+            currentUser.premium = true;
             alert("¡Pago exitoso! Ahora eres miembro VIP 🌸");
-            // Nota: En una app real, aquí enviaríamos una petición al backend para guardar el cambio.
-            closeModal('readModal'); // Cerramos para que pueda reabrir y ver
+            closeModal('readModal');
+            updateUI(); // Para mostrar el diamante
         }
     }
 
-    // --- INTERFAZ DE USUARIO (UI) ---
+    // --- INTERFAZ DE USUARIO (LA LOGICA DE PERMISOS) ---
 
     function updateUI() {
         const nav = document.getElementById('navActions');
+        nav.innerHTML = ''; // Limpiar
+
         if (currentUser) {
-            // Usuario logueado
-            nav.innerHTML = `
-                <span class="user-welcome">Hola, ${currentUser.nombre} ${currentUser.premium ? '💎' : ''}</span>
-                <button class="btn-outline" onclick="openModal('uploadModal')">Escribir</button>
-                <button class="btn-solid" onclick="logout()">Salir</button>
-            `;
+            // -- USUARIO LOGUEADO --
+
+            // 1. Saludo
+            let html = `<span class="user-welcome">Hola, ${currentUser.nombre} ${currentUser.premium ? '💎' : ''}</span>`;
+
+            // 2. LA MAGIA: SOLO SI ES EL ADMIN MUESTRA EL BOTÓN DE ESCRIBIR
+            if (currentUser.email === ADMIN_EMAIL) {
+                html += `<button class="btn-outline" onclick="openModal('uploadModal')">Escribir</button>`;
+            }
+
+            // 3. Botón Salir
+            html += `<button class="btn-solid" onclick="logout()">Salir</button>`;
+
+            nav.innerHTML = html;
+
         } else {
-            // Usuario anónimo
+            // -- USUARIO NO LOGUEADO (Invitado) --
             nav.innerHTML = `
                 <button class="btn-outline" onclick="openModal('loginModal')">Entrar</button>
                 <button class="btn-solid" onclick="openModal('registerModal')">Registrarse</button>
@@ -343,7 +361,7 @@
         }
     }
 
-    // --- CARGA DE POEMAS ---
+    // --- CARGA DE POEMAS (GET) ---
     async function loadPoems() {
         try {
             const res = await fetch(API_POEMAS);
@@ -358,9 +376,8 @@
         const grid = document.getElementById('poetryGrid');
         grid.innerHTML = '';
 
-        // Filtros
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        // (Simplificado para el ejemplo, siempre marca 'Todo' o el que clickees)
+        // (Nota: aquí deberíamos actualizar el botón activo visualmente, pero lo simplificamos)
 
         const filtered = poems.filter(p => {
             if (filter === 'free') return !p.premium;
@@ -369,7 +386,7 @@
         });
 
         if(filtered.length === 0) {
-            grid.innerHTML = '<p>No hay poemas aún.</p>'; return;
+            grid.innerHTML = '<p style="color:#999;">No hay poemas en esta sección.</p>'; return;
         }
 
         filtered.forEach(poem => {
@@ -396,6 +413,7 @@
         });
     }
 
+    // --- ABRIR POEMA (LÓGICA DE BLOQUEO) ---
     function openPoem(id) {
         const poem = poems.find(p => p.id === id);
         if(!poem) return;
@@ -403,26 +421,26 @@
         const modalContent = document.getElementById('modalContent');
         let html = '';
 
-        // LÓGICA DE SEGURIDAD VISUAL
-        // 1. Si el poema es GRATIS -> Todos pueden leer
-        // 2. Si es PREMIUM:
-        //    a. Si no hay usuario -> Bloqueado (Pide login)
-        //    b. Si hay usuario pero NO es premium -> Bloqueado (Pide pagar)
-        //    c. Si hay usuario Y es premium -> Desbloqueado
+        // Reglas:
+        // 1. El ADMIN (Tú) siempre ve todo.
+        // 2. Si es GRATIS, todos ven todo.
+        // 3. Si es PREMIUM, necesitas estar logueado Y haber pagado.
 
-        if (!poem.premium) {
-            // Caso Gratis
+        const isUserAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
+
+        if (isUserAdmin || !poem.premium) {
+            // Caso: Eres el jefe O el poema es gratis
             html = buildPoemHtml(poem.title, poem.body);
         } else {
-            // Caso Premium
+            // Caso: Poema Premium para mortales
             if (!currentUser) {
                 // No logueado
                 html = buildLockedHtml(poem.title, poem.body, "Inicia sesión para leer este poema exclusivo.", "openModal('loginModal'); closeModal('readModal')","Iniciar Sesión");
             } else if (!currentUser.premium) {
-                // Logueado pero pobre
+                // Logueado sin pagar
                 html = buildLockedHtml(poem.title, poem.body, "Este contenido es para miembros VIP.", "upgradeUser()", "Hacerme Premium ($5)");
             } else {
-                // Logueado y VIP
+                // Logueado y pagó
                 html = buildPoemHtml(poem.title, poem.body);
             }
         }
@@ -456,6 +474,7 @@
         `;
     }
 
+    // --- SUBIDA (POST) ---
     async function handleUpload(e) {
         e.preventDefault();
         const poem = {
@@ -478,22 +497,20 @@
         alert("Publicado con éxito");
     }
 
-    // --- UTILIDADES MODALES ---
+    // --- UTILIDADES ---
     function openModal(id) { document.getElementById(id).classList.add('open'); }
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
     function switchModals(closeId, openId) { closeModal(closeId); openModal(openId); }
     window.onclick = (e) => { if(e.target.classList.contains('modal-overlay')) e.target.classList.remove('open'); }
-
-    // --- INICIO ---
-    updateUI();
-    loadPoems();
-
-    // Funciones para filtros
     function filterPoetry(type, btn) {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         renderPoems(type);
     }
+
+    // --- INICIO ---
+    updateUI();
+    loadPoems();
 </script>
 
 </body>
