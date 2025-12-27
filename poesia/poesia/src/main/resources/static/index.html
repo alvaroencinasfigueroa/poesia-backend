@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- ESTILOS IGUALES QUE ANTES --- */
+        /* --- ESTILOS VISUALES (Mismo diseño rosa) --- */
         :root {
             --bg-color: #fff5f8;
             --text-color: #543d41;
@@ -33,6 +33,7 @@
             background-image: linear-gradient(to bottom, #fffbfd 0%, #fff5f8 100%);
         }
 
+        /* HEADER ACTUALIZADO */
         header {
             padding: 2rem 5%;
             display: flex;
@@ -44,206 +45,118 @@
             font-family: var(--font-serif);
             font-size: 1.6rem;
             font-weight: 700;
-            letter-spacing: 1px;
             color: var(--accent-color);
+            text-decoration: none;
         }
 
-        .btn-write {
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-outline {
             background: transparent;
             border: 2px solid var(--accent-color);
             color: var(--accent-color);
-            padding: 8px 24px;
+            padding: 8px 20px;
             border-radius: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
             font-weight: 700;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 0.9rem;
         }
 
-        .btn-write:hover {
+        .btn-outline:hover {
             background: var(--accent-color);
             color: white;
-            box-shadow: 0 5px 15px rgba(214, 124, 147, 0.3);
         }
 
-        .hero {
-            text-align: center;
-            padding: 4rem 1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-family: var(--font-serif);
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            font-style: italic;
-            background: linear-gradient(45deg, var(--text-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            color: var(--secondary-color);
-            font-size: 1.15rem;
-        }
-
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 3.5rem;
-        }
-
-        .filter-btn {
-            border: none;
-            background: none;
+        .btn-solid {
+            background: var(--accent-color);
+            color: white;
+            border: 2px solid var(--accent-color);
+            padding: 8px 20px;
+            border-radius: 30px;
             cursor: pointer;
-            font-size: 1rem;
-            color: var(--secondary-color);
-            padding-bottom: 8px;
-            position: relative;
-            font-family: var(--font-sans);
-            transition: color 0.3s ease;
+            font-weight: 700;
+            transition: all 0.3s;
+            font-size: 0.9rem;
         }
 
-        .filter-btn:hover { color: var(--accent-color); }
-        .filter-btn.active { color: var(--accent-color); font-weight: 700; }
-        .filter-btn.active::after {
-            content: ''; position: absolute; bottom: 0; left: 25%; width: 50%;
-            height: 3px; background: var(--accent-color); border-radius: 2px;
+        .btn-solid:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+            transform: translateY(-2px);
         }
+
+        .user-welcome {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: var(--text-color);
+            margin-right: 10px;
+        }
+
+        /* RESTO DEL DISEÑO */
+        .hero { text-align: center; padding: 4rem 1rem; max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-family: var(--font-serif); font-size: 4rem; margin-bottom: 1rem; font-style: italic; color: var(--text-color); }
+        .hero p { color: var(--secondary-color); font-size: 1.15rem; }
+
+        .filters { display: flex; justify-content: center; gap: 25px; margin-bottom: 3.5rem; }
+        .filter-btn { border: none; background: none; cursor: pointer; font-size: 1rem; color: var(--secondary-color); padding-bottom: 8px; position: relative; font-family: var(--font-sans); }
+        .filter-btn:hover, .filter-btn.active { color: var(--accent-color); font-weight: 700; }
+        .filter-btn.active::after { content: ''; position: absolute; bottom: 0; left: 25%; width: 50%; height: 3px; background: var(--accent-color); border-radius: 2px; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem 5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 45px; }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 45px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            transition: all 0.4s ease;
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 380px;
-            border: 1px solid var(--card-border);
-        }
-
+        .card { background: var(--card-bg); padding: 2.5rem; border-radius: 12px; box-shadow: var(--card-shadow); transition: all 0.4s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; min-height: 380px; border: 1px solid var(--card-border); }
         .card:hover { transform: translateY(-8px); box-shadow: 0 20px 45px rgba(214, 124, 147, 0.25); border-color: #ffd1e0; }
 
-        .card-tag {
-            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;
-            color: var(--secondary-color); margin-bottom: 1.5rem; display: flex;
-            justify-content: space-between; font-weight: 700;
-        }
-
+        .card-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--secondary-color); margin-bottom: 1.5rem; display: flex; justify-content: space-between; font-weight: 700; }
         .premium-badge { color: var(--accent-color); background: #fff0f4; padding: 2px 8px; border-radius: 10px; }
-
         .card h2 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1rem; line-height: 1.15; color: var(--text-color); }
-
-        .card-preview {
-            font-family: var(--font-serif); color: #7a676a; font-size: 1.05rem;
-            margin-bottom: 2rem; flex-grow: 1; white-space: pre-line; overflow: hidden;
-            max-height: 160px; position: relative; font-style: italic;
-        }
-
-        .card-preview::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60px;
-            background: linear-gradient(transparent, var(--card-bg));
-        }
-
-        .card-footer {
-            display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid var(--card-border); padding-top: 1.2rem;
-        }
-
-        .read-btn { font-size: 0.9rem; font-weight: 700; color: var(--secondary-color); text-decoration: none; transition: color 0.3s; }
+        .card-preview { font-family: var(--font-serif); color: #7a676a; font-size: 1.05rem; margin-bottom: 2rem; flex-grow: 1; white-space: pre-line; overflow: hidden; max-height: 160px; position: relative; font-style: italic; }
+        .card-preview::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60px; background: linear-gradient(transparent, var(--card-bg)); }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--card-border); padding-top: 1.2rem; }
+        .read-btn { font-size: 0.9rem; font-weight: 700; color: var(--secondary-color); transition: color 0.3s; }
         .card:hover .read-btn { color: var(--accent-color); }
-        .price-tag { font-weight: 700; color: var(--accent-color); font-size: 1.1rem; }
 
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 245, 248, 0.97); backdrop-filter: blur(8px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.4s ease;
-        }
-
+        /* MODALES */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 245, 248, 0.97); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.4s ease; }
         .modal-overlay.open { opacity: 1; visibility: visible; }
+        .modal-content { background: #fff; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; padding: 3rem; box-shadow: 0 25px 70px rgba(214, 124, 147, 0.2); position: relative; text-align: center; border-radius: 16px; border: 1px solid var(--card-border); }
+        .modal-content.wide { max-width: 700px; padding: 4rem; } /* Para lectura */
 
-        .modal-content {
-            background: #fff; width: 90%; max-width: 700px; max-height: 90vh;
-            overflow-y: auto; padding: 4rem; box-shadow: 0 25px 70px rgba(214, 124, 147, 0.2);
-            position: relative; text-align: center; border-radius: 16px; border: 1px solid var(--card-border);
-        }
+        .close-modal { position: absolute; top: 20px; right: 25px; font-size: 2rem; cursor: pointer; background: none; border: none; color: var(--accent-color); }
+        .modal-title { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-color); }
 
-        .modal-content::-webkit-scrollbar { width: 8px; }
-        .modal-content::-webkit-scrollbar-track { background: #fff0f4; }
-        .modal-content::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 4px;}
-
-        .close-modal {
-            position: absolute; top: 25px; right: 35px; font-size: 2.5rem;
-            cursor: pointer; background: none; border: none; color: var(--accent-color);
-            transition: transform 0.3s;
-        }
-        .close-modal:hover { transform: rotate(90deg); }
-
-        .poem-full-title { font-family: var(--font-serif); font-size: 3rem; margin-bottom: 2.5rem; color: var(--accent-color); }
-        .poem-body { font-family: var(--font-serif); font-size: 1.3rem; line-height: 2.2; color: var(--text-color); white-space: pre-wrap; text-align: left; padding: 0 1rem; }
-
-        .locked-content { filter: blur(10px); user-select: none; pointer-events: none; opacity: 0.5; }
-
-        .pay-wall {
-            position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
-            text-align: center; width: 85%; background: rgba(255,255,255,0.95);
-            padding: 3rem 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 2px solid var(--accent-color);
-        }
-
-        .pay-wall h3 { font-family: var(--font-serif); color: var(--accent-color); font-size: 1.8rem; margin-bottom: 1rem;}
-
-        .btn-buy {
-            background: var(--accent-color); color: #fff; border: none; padding: 15px 40px;
-            font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 1.5rem;
-            transition: all 0.3s; border-radius: 50px; box-shadow: 0 5px 15px rgba(214, 124, 147, 0.4);
-        }
-
-        .btn-buy:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(214, 124, 147, 0.5); }
-
-        .form-group { margin-bottom: 1.8rem; text-align: left; }
-        .form-group label { display: block; margin-bottom: 0.8rem; font-weight: 700; font-size: 0.95rem; color: var(--text-color); }
-
-        .form-input, .form-textarea {
-            width: 100%; padding: 15px; border: 2px solid var(--card-border);
-            font-family: var(--font-sans); border-radius: 10px; background: #fffbfd;
-            transition: border-color 0.3s; font-size: 1rem; color: var(--text-color);
-        }
-
+        .form-group { margin-bottom: 1.2rem; text-align: left; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; font-size: 0.9rem; color: var(--text-color); }
+        .form-input, .form-textarea { width: 100%; padding: 12px; border: 2px solid var(--card-border); font-family: var(--font-sans); border-radius: 8px; background: #fffbfd; font-size: 1rem; }
         .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent-color); background: #fff; }
-        .form-textarea { height: 180px; font-family: var(--font-serif); line-height: 1.8; }
+        .form-textarea { height: 150px; }
 
-        .checkbox-group { display: flex; align-items: center; gap: 12px; background: #fff0f4; padding: 15px; border-radius: 10px; }
-        input[type="checkbox"] { accent-color: var(--accent-color); width: 18px; height: 18px; }
+        .poem-full-title { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 2rem; color: var(--accent-color); }
+        .poem-body { font-family: var(--font-serif); font-size: 1.2rem; line-height: 2; color: var(--text-color); white-space: pre-wrap; text-align: left; }
+        .locked-content { filter: blur(8px); opacity: 0.5; user-select: none; }
 
+        .pay-wall { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.95); padding: 2rem; border-radius: 12px; width: 80%; border: 2px solid var(--accent-color); }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo"> <i class="fas fa-feather-alt"></i> Anthology.</div>
-    <button class="btn-write" onclick="openUploadModal()">Escribir</button>
+    <a href="#" class="logo" onclick="renderPoems()"><i class="fas fa-feather-alt"></i> Anthology.</a>
+
+    <div class="nav-actions" id="navActions">
+    </div>
 </header>
 
 <section class="hero">
     <h1>Versos de Seda y Alma</h1>
-    <p>Una colección íntima de sentimientos. Donde las palabras se visten de rosa y los secretos esperan ser descubiertos.</p>
+    <p>Una colección íntima. Regístrate para desbloquear los secretos más profundos.</p>
 </section>
 
 <div class="filters">
@@ -254,219 +167,334 @@
 
 <div class="container">
     <div class="grid" id="poetryGrid">
-        <p style="text-align:center; width:100%;">Cargando inspiración...</p>
+        <p style="text-align:center; width:100%;">Cargando...</p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="loginModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
+        <h2 class="modal-title">Bienvenido de nuevo</h2>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="loginPass" class="form-input" required>
+            </div>
+            <button type="submit" class="btn-solid" style="width:100%">Entrar</button>
+        </form>
+        <p style="margin-top:1rem; font-size:0.9rem;">¿No tienes cuenta? <a href="#" onclick="switchModals('loginModal','registerModal')" style="color:var(--accent-color)">Regístrate</a></p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="registerModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('registerModal')">&times;</button>
+        <h2 class="modal-title">Crear Cuenta</h2>
+        <form onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" id="regName" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="regEmail" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="regPass" class="form-input" required>
+            </div>
+            <button type="submit" class="btn-solid" style="width:100%">Registrarse</button>
+        </form>
     </div>
 </div>
 
 <div class="modal-overlay" id="readModal">
-    <div class="modal-content">
+    <div class="modal-content wide">
         <button class="close-modal" onclick="closeModal('readModal')">&times;</button>
         <div id="modalContent"></div>
     </div>
 </div>
 
 <div class="modal-overlay" id="uploadModal">
-    <div class="modal-content" style="text-align: left;">
+    <div class="modal-content">
         <button class="close-modal" onclick="closeModal('uploadModal')">&times;</button>
-        <h2 style="font-family: var(--font-serif); margin-bottom: 2rem; color: var(--accent-color); text-align: center;">Publicar nuevo poema</h2>
-        <form id="uploadForm" onsubmit="handleUpload(event)">
+        <h2 class="modal-title">Publicar Poema</h2>
+        <form onsubmit="handleUpload(event)">
             <div class="form-group">
                 <label>Título</label>
-                <input type="text" id="pTitle" class="form-input" required placeholder="Ej: Susurros de atardecer">
+                <input type="text" id="pTitle" class="form-input" required>
             </div>
             <div class="form-group">
-                <label>Contenido del Poema</label>
-                <textarea id="pBody" class="form-textarea" required placeholder="Escribe tus versos aquí..."></textarea>
+                <label>Contenido</label>
+                <textarea id="pBody" class="form-textarea" required></textarea>
             </div>
-            <div class="form-group checkbox-group">
-                <input type="checkbox" id="pPremium" onchange="togglePriceInput()">
-                <label for="pPremium" style="margin-bottom: 0; cursor: pointer;">¿Es contenido Premium?</label>
+            <div class="form-group" style="display:flex; gap:10px; align-items:center;">
+                <input type="checkbox" id="pPremium" style="width:20px; height:20px; accent-color:var(--accent-color);">
+                <label for="pPremium" style="margin:0; cursor:pointer;">¿Es Premium?</label>
             </div>
-            <div class="form-group" id="priceGroup" style="display:none; animation: fadeIn 0.3s ease;">
-                <label>Precio ($ USD)</label>
-                <input type="number" id="pPrice" class="form-input" placeholder="Ej: 2.99" step="0.01">
-            </div>
-            <button type="submit" class="btn-buy" style="width: 100%; margin-top: 1rem;">Publicar en la Nube</button>
+            <button type="submit" class="btn-solid" style="width:100%">Publicar</button>
         </form>
     </div>
 </div>
 
 <script>
-        // --- 1. CONFIGURACIÓN DE CONEXIÓN A JAVA ---
-        const API_URL = "http://localhost:8080/api/poesias";
-        let poems = []; // Aquí guardaremos lo que venga de la base de datos
+    // --- VARIABLES GLOBALES ---
+    const API_POEMAS = "http://localhost:8080/api/poesias";
+    const API_AUTH = "http://localhost:8080/api/auth";
 
-        // --- 2. FUNCIÓN PARA CARGAR POEMAS (GET) ---
-        async function loadPoems() {
-            try {
-                const response = await fetch(API_URL); // Llama a tu Java Controller
-                if(response.ok) {
-                    poems = await response.json(); // Convierte la respuesta a lista
-                    renderPoems('all'); // Muestra los poemas
-                } else {
-                    console.error("Error al cargar");
-                }
-            } catch (error) {
-                console.error("Error de conexión:", error);
-                document.getElementById('poetryGrid').innerHTML = '<p>No se pudo conectar con el servidor.</p>';
-            }
-        }
+    let poems = [];
+    let currentUser = null; // Aquí guardamos al usuario si se loguea
 
-        // --- 3. RENDERIZADO (IGUAL QUE ANTES) ---
-        const grid = document.getElementById('poetryGrid');
+    // --- FUNCIONES DE AUTENTICACIÓN ---
 
-        function renderPoems(filter = 'all') {
-            grid.innerHTML = '';
-            const filteredPoems = poems.filter(p => {
-                if (filter === 'free') return !p.premium;
-                if (filter === 'premium') return p.premium;
-                return true;
+    async function handleRegister(e) {
+        e.preventDefault();
+        const usuario = {
+            nombre: document.getElementById('regName').value,
+            email: document.getElementById('regEmail').value,
+            password: document.getElementById('regPass').value
+        };
+
+        try {
+            const res = await fetch(`${API_AUTH}/register`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(usuario)
             });
-
-            if(filteredPoems.length === 0) {
-                grid.innerHTML = '<p style="text-align:center; color:#999;">Aún no hay poemas en esta categoría.</p>';
-                return;
-            }
-
-            filteredPoems.forEach(poem => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.onclick = () => openPoem(poem.id);
-                // Cortar texto para la vista previa
-                const snippet = poem.body ? poem.body.split('\n').slice(0, 4).join('\n') : "Sin contenido...";
-
-                card.innerHTML = `
-                    <div>
-                        <div class="card-tag">
-                            <span>Poesía</span>
-                            ${poem.premium ? '<span class="premium-badge"><i class="fas fa-heart"></i> Premium</span>' : '<span>Gratis</span>'}
-                        </div>
-                        <h2>${poem.title}</h2>
-                        <div class="card-preview">${snippet}...</div>
-                    </div>
-                    <div class="card-footer">
-                        <span class="read-btn">Leer versos <i class="fas fa-arrow-right" style="font-size: 0.8rem; margin-left: 5px;"></i></span>
-                        ${poem.premium ? `<span class="price-tag"><i class="fas fa-lock"></i></span>` : ''}
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // --- 4. FUNCIÓN PARA SUBIR POEMA (POST) ---
-        async function handleUpload(e) {
-            e.preventDefault();
-            const title = document.getElementById('pTitle').value;
-            const body = document.getElementById('pBody').value;
-            const isPremium = document.getElementById('pPremium').checked;
-
-            // Creamos el objeto tal como lo espera Java
-            const newPoem = {
-                title: title,
-                body: body,
-                premium: isPremium,
-                description: "Autor Anónimo" // Campo obligatorio en tu Java, ponemos uno por defecto
-            };
-
-            try {
-                // Enviamos los datos a Java
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(newPoem)
-                });
-
-                if (response.ok) {
-                    // Si todo salió bien
-                    document.getElementById('uploadForm').reset();
-                    document.getElementById('priceGroup').style.display = 'none';
-                    closeModal('uploadModal');
-                    loadPoems(); // Recargamos la lista para ver el nuevo poema
-                    alert("¡Poema publicado con éxito!");
-                } else {
-                    alert("Hubo un error al guardar el poema.");
-                }
-            } catch (error) {
-                console.error("Error al subir:", error);
-                alert("Error de conexión con el servidor.");
-            }
-        }
-
-        // --- INTERFAZ (Filtros, Modales) ---
-        function filterPoetry(type, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderPoems(type);
-        }
-
-        function openPoem(id) {
-            const poem = poems.find(p => p.id === id);
-            if(!poem) return;
-
-            const modalContent = document.getElementById('modalContent');
-            const overlay = document.getElementById('readModal');
-            let contentHtml = '';
-
-            if (poem.premium) {
-                contentHtml = `
-                    <h1 class="poem-full-title"><i class="fas fa-lock" style="font-size: 1.5rem; opacity: 0.5;"></i> ${poem.title}</h1>
-                    <div style="position: relative;">
-                        <div class="poem-body locked-content" id="lockedText">
-                            ${poem.body}
-                        </div>
-                        <div class="pay-wall" id="payWall">
-                            <h3><i class="far fa-heart"></i> Contenido Exclusivo</h3>
-                            <p style="color: var(--secondary-color); margin-bottom: 1rem;">Este poema es especial.</p>
-                            <button class="btn-buy" onclick="simulatePayment(event)">Desbloquear lectura</button>
-                        </div>
-                    </div>
-                `;
+            if(res.ok) {
+                alert("¡Cuenta creada! Ahora inicia sesión.");
+                switchModals('registerModal', 'loginModal');
             } else {
-                contentHtml = `
-                    <h1 class="poem-full-title">${poem.title}</h1>
-                    <div class="poem-body">${poem.body}</div>
-                    <div style="margin-top: 4rem; color: var(--accent-color); font-size: 1.2rem; opacity: 0.6;">
-                        <i class="fas fa-seedling"></i>
+                alert("Error: El email ya existe o hubo un fallo.");
+            }
+        } catch(err) { console.error(err); alert("Error de conexión"); }
+    }
+
+    async function handleLogin(e) {
+        e.preventDefault();
+        const credenciales = {
+            email: document.getElementById('loginEmail').value,
+            password: document.getElementById('loginPass').value
+        };
+
+        try {
+            const res = await fetch(`${API_AUTH}/login`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(credenciales)
+            });
+
+            // Si el backend devuelve un usuario (no está vacío)
+            const usuario = await res.json();
+
+            if(usuario && usuario.id) {
+                currentUser = usuario;
+                closeModal('loginModal');
+                updateUI();
+                alert(`¡Bienvenido, ${currentUser.nombre}!`);
+            } else {
+                alert("Email o contraseña incorrectos.");
+            }
+        } catch(err) {
+            console.error(err);
+            // En caso de que el backend devuelva vacío y falle el json parse
+            alert("Credenciales incorrectas.");
+        }
+    }
+
+    function logout() {
+        currentUser = null;
+        updateUI();
+        alert("Has cerrado sesión.");
+    }
+
+    function upgradeUser() {
+        if(!currentUser) return;
+        // Simulación de pago
+        if(confirm(`Hola ${currentUser.nombre}, ¿quieres pagar $5 USD para ser Premium?`)) {
+            currentUser.premium = true; // Actualizamos localmente para ver el efecto inmediato
+            alert("¡Pago exitoso! Ahora eres miembro VIP 🌸");
+            // Nota: En una app real, aquí enviaríamos una petición al backend para guardar el cambio.
+            closeModal('readModal'); // Cerramos para que pueda reabrir y ver
+        }
+    }
+
+    // --- INTERFAZ DE USUARIO (UI) ---
+
+    function updateUI() {
+        const nav = document.getElementById('navActions');
+        if (currentUser) {
+            // Usuario logueado
+            nav.innerHTML = `
+                <span class="user-welcome">Hola, ${currentUser.nombre} ${currentUser.premium ? '💎' : ''}</span>
+                <button class="btn-outline" onclick="openModal('uploadModal')">Escribir</button>
+                <button class="btn-solid" onclick="logout()">Salir</button>
+            `;
+        } else {
+            // Usuario anónimo
+            nav.innerHTML = `
+                <button class="btn-outline" onclick="openModal('loginModal')">Entrar</button>
+                <button class="btn-solid" onclick="openModal('registerModal')">Registrarse</button>
+            `;
+        }
+    }
+
+    // --- CARGA DE POEMAS ---
+    async function loadPoems() {
+        try {
+            const res = await fetch(API_POEMAS);
+            if(res.ok) {
+                poems = await res.json();
+                renderPoems();
+            }
+        } catch(err) { console.error(err); }
+    }
+
+    function renderPoems(filter = 'all') {
+        const grid = document.getElementById('poetryGrid');
+        grid.innerHTML = '';
+
+        // Filtros
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        // (Simplificado para el ejemplo, siempre marca 'Todo' o el que clickees)
+
+        const filtered = poems.filter(p => {
+            if (filter === 'free') return !p.premium;
+            if (filter === 'premium') return p.premium;
+            return true;
+        });
+
+        if(filtered.length === 0) {
+            grid.innerHTML = '<p>No hay poemas aún.</p>'; return;
+        }
+
+        filtered.forEach(poem => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.onclick = () => openPoem(poem.id);
+            const snippet = poem.body ? poem.body.substring(0, 100).replace(/\n/g, ' ') : "";
+
+            card.innerHTML = `
+                <div>
+                    <div class="card-tag">
+                        <span>Poesía</span>
+                        ${poem.premium ? '<span class="premium-badge"><i class="fas fa-heart"></i> Premium</span>' : '<span>Gratis</span>'}
                     </div>
-                `;
+                    <h2>${poem.title}</h2>
+                    <div class="card-preview">${snippet}...</div>
+                </div>
+                <div class="card-footer">
+                    <span class="read-btn">Leer <i class="fas fa-arrow-right"></i></span>
+                    ${poem.premium ? '<i class="fas fa-lock" style="color:var(--accent-color)"></i>' : ''}
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function openPoem(id) {
+        const poem = poems.find(p => p.id === id);
+        if(!poem) return;
+
+        const modalContent = document.getElementById('modalContent');
+        let html = '';
+
+        // LÓGICA DE SEGURIDAD VISUAL
+        // 1. Si el poema es GRATIS -> Todos pueden leer
+        // 2. Si es PREMIUM:
+        //    a. Si no hay usuario -> Bloqueado (Pide login)
+        //    b. Si hay usuario pero NO es premium -> Bloqueado (Pide pagar)
+        //    c. Si hay usuario Y es premium -> Desbloqueado
+
+        if (!poem.premium) {
+            // Caso Gratis
+            html = buildPoemHtml(poem.title, poem.body);
+        } else {
+            // Caso Premium
+            if (!currentUser) {
+                // No logueado
+                html = buildLockedHtml(poem.title, poem.body, "Inicia sesión para leer este poema exclusivo.", "openModal('loginModal'); closeModal('readModal')","Iniciar Sesión");
+            } else if (!currentUser.premium) {
+                // Logueado pero pobre
+                html = buildLockedHtml(poem.title, poem.body, "Este contenido es para miembros VIP.", "upgradeUser()", "Hacerme Premium ($5)");
+            } else {
+                // Logueado y VIP
+                html = buildPoemHtml(poem.title, poem.body);
             }
-            modalContent.innerHTML = contentHtml;
-            overlay.classList.add('open');
         }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('open');
-        }
-        function openUploadModal() {
-            document.getElementById('uploadModal').classList.add('open');
-        }
-        function togglePriceInput() {
-            const isPremium = document.getElementById('pPremium').checked;
-            document.getElementById('priceGroup').style.display = isPremium ? 'block' : 'none';
-        }
+        modalContent.innerHTML = html;
+        openModal('readModal');
+    }
 
-        window.simulatePayment = function(e) {
-            e.stopPropagation();
-            const btn = e.target;
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Procesando...';
-            setTimeout(() => {
-                document.getElementById('payWall').style.display = 'none';
-                document.getElementById('lockedText').classList.remove('locked-content');
-            }, 1000);
-        }
+    function buildPoemHtml(title, body) {
+        return `
+            <h1 class="poem-full-title">${title}</h1>
+            <div class="poem-body">${body}</div>
+            <div style="margin-top:3rem; color:var(--accent-color); opacity:0.6"><i class="fas fa-seedling"></i></div>
+        `;
+    }
 
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal-overlay')) {
-                event.target.classList.remove('open');
-            }
-        }
+    function buildLockedHtml(title, body, msg, action, btnText) {
+        return `
+            <h1 class="poem-full-title"><i class="fas fa-lock" style="opacity:0.5"></i> ${title}</h1>
+            <div style="position: relative;">
+                <div class="poem-body locked-content">
+                    ${body.substring(0, 50)}... <br><br>
+                    (El resto del poema se desvanece en la niebla...)
+                </div>
+                <div class="pay-wall">
+                    <h3>Contenido Exclusivo</h3>
+                    <p style="margin-bottom:1rem; color:var(--secondary-color)">${msg}</p>
+                    <button class="btn-solid" onclick="${action}">${btnText}</button>
+                </div>
+            </div>
+        `;
+    }
 
-        // --- INICIALIZACIÓN ---
-        // Al cargar la página, pedimos los datos a Java
+    async function handleUpload(e) {
+        e.preventDefault();
+        const poem = {
+            title: document.getElementById('pTitle').value,
+            body: document.getElementById('pBody').value,
+            premium: document.getElementById('pPremium').checked,
+            description: "Anon"
+        };
+
+        await fetch(API_POEMAS, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(poem)
+        });
+
+        closeModal('uploadModal');
+        document.getElementById('pTitle').value = "";
+        document.getElementById('pBody').value = "";
         loadPoems();
+        alert("Publicado con éxito");
+    }
 
-    </script>
+    // --- UTILIDADES MODALES ---
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    function switchModals(closeId, openId) { closeModal(closeId); openModal(openId); }
+    window.onclick = (e) => { if(e.target.classList.contains('modal-overlay')) e.target.classList.remove('open'); }
+
+    // --- INICIO ---
+    updateUI();
+    loadPoems();
+
+    // Funciones para filtros
+    function filterPoetry(type, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderPoems(type);
+    }
+</script>
+
 </body>
 </html>
