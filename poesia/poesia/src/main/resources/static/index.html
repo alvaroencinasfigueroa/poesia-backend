@@ -8,17 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- NUEVA PALETA DE COLORES ROSA/FEMENINA --- */
+        /* --- ESTILOS IGUALES QUE ANTES --- */
         :root {
-            --bg-color: #fff5f8;           /* Fondo rosa muy pálido (como seda) */
-            --text-color: #543d41;         /* Texto principal: un marrón rojizo oscuro y cálido */
-            --accent-color: #d67c93;       /* Color acento: Rosa viejo / Dusty Rose elegante */
-            --accent-hover: #b8657a;       /* Un tono más oscuro para los hovers */
-            --secondary-color: #a39094;    /* Textos secundarios, un tono malva apagado */
-            --card-bg: #ffffff;            /* Fondo blanco puro para las tarjetas */
-            --card-border: #ffe6ee;        /* Un borde rosado muy sutil */
-            --card-shadow: 0 15px 35px rgba(214, 124, 147, 0.15); /* Sombra con tinte rosado */
-
+            --bg-color: #fff5f8;
+            --text-color: #543d41;
+            --accent-color: #d67c93;
+            --accent-hover: #b8657a;
+            --secondary-color: #a39094;
+            --card-bg: #ffffff;
+            --card-border: #ffe6ee;
+            --card-shadow: 0 15px 35px rgba(214, 124, 147, 0.15);
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Lato', sans-serif;
         }
@@ -31,10 +30,9 @@
             font-family: var(--font-sans);
             line-height: 1.6;
             overflow-x: hidden;
-            background-image: linear-gradient(to bottom, #fffbfd 0%, #fff5f8 100%); /* Degradado sutil */
+            background-image: linear-gradient(to bottom, #fffbfd 0%, #fff5f8 100%);
         }
 
-        /* --- HEADER & HERO --- */
         header {
             padding: 2rem 5%;
             display: flex;
@@ -47,12 +45,12 @@
             font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: 1px;
-            color: var(--accent-color); /* Logo en rosa */
+            color: var(--accent-color);
         }
 
         .btn-write {
             background: transparent;
-            border: 2px solid var(--accent-color); /* Borde rosa */
+            border: 2px solid var(--accent-color);
             color: var(--accent-color);
             padding: 8px 24px;
             border-radius: 30px;
@@ -90,7 +88,6 @@
             font-size: 1.15rem;
         }
 
-        /* --- FILTROS --- */
         .filters {
             display: flex;
             justify-content: center;
@@ -110,32 +107,14 @@
             transition: color 0.3s ease;
         }
 
-        .filter-btn:hover {
-             color: var(--accent-color);
-        }
-
-        .filter-btn.active {
-            color: var(--accent-color);
-            font-weight: 700;
-        }
-
+        .filter-btn:hover { color: var(--accent-color); }
+        .filter-btn.active { color: var(--accent-color); font-weight: 700; }
         .filter-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%; /* Línea más corta y centrada */
-            height: 3px;
-            background: var(--accent-color);
-            border-radius: 2px;
+            content: ''; position: absolute; bottom: 0; left: 25%; width: 50%;
+            height: 3px; background: var(--accent-color); border-radius: 2px;
         }
 
-        /* --- GRID DE POEMAS --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem 5rem;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem 5rem; }
 
         .grid {
             display: grid;
@@ -146,7 +125,7 @@
         .card {
             background: var(--card-bg);
             padding: 2.5rem;
-            border-radius: 12px; /* Bordes más redondeados y suaves */
+            border-radius: 12px;
             box-shadow: var(--card-shadow);
             transition: all 0.4s ease;
             position: relative;
@@ -158,256 +137,100 @@
             border: 1px solid var(--card-border);
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 45px rgba(214, 124, 147, 0.25);
-            border-color: #ffd1e0;
-        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 45px rgba(214, 124, 147, 0.25); border-color: #ffd1e0; }
 
         .card-tag {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            font-weight: 700;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--secondary-color); margin-bottom: 1.5rem; display: flex;
+            justify-content: space-between; font-weight: 700;
         }
 
-        .premium-badge {
-            color: var(--accent-color);
-            background: #fff0f4; /* Fondo sutil para el badge */
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
+        .premium-badge { color: var(--accent-color); background: #fff0f4; padding: 2px 8px; border-radius: 10px; }
 
-        .card h2 {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            line-height: 1.15;
-            color: var(--text-color);
-        }
+        .card h2 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1rem; line-height: 1.15; color: var(--text-color); }
 
         .card-preview {
-            font-family: var(--font-serif);
-            color: #7a676a; /* Un gris un poco más cálido */
-            font-size: 1.05rem;
-            margin-bottom: 2rem;
-            flex-grow: 1;
-            white-space: pre-line;
-            overflow: hidden;
-            max-height: 160px;
-            position: relative;
-            font-style: italic;
+            font-family: var(--font-serif); color: #7a676a; font-size: 1.05rem;
+            margin-bottom: 2rem; flex-grow: 1; white-space: pre-line; overflow: hidden;
+            max-height: 160px; position: relative; font-style: italic;
         }
 
         .card-preview::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            /* Degradado a blanco, que es el fondo de la tarjeta */
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60px;
             background: linear-gradient(transparent, var(--card-bg));
         }
 
         .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--card-border);
-            padding-top: 1.2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid var(--card-border); padding-top: 1.2rem;
         }
 
-        .read-btn {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+        .read-btn { font-size: 0.9rem; font-weight: 700; color: var(--secondary-color); text-decoration: none; transition: color 0.3s; }
+        .card:hover .read-btn { color: var(--accent-color); }
+        .price-tag { font-weight: 700; color: var(--accent-color); font-size: 1.1rem; }
 
-        .card:hover .read-btn {
-             color: var(--accent-color);
-        }
-
-        .price-tag {
-            font-weight: 700;
-            color: var(--accent-color);
-            font-size: 1.1rem;
-        }
-
-        /* --- MODAL LECTURA --- */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 245, 248, 0.97); /* Fondo rosa casi opaco */
-            backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 245, 248, 0.97); backdrop-filter: blur(8px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.4s ease;
         }
 
-        .modal-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal-overlay.open { opacity: 1; visibility: visible; }
 
         .modal-content {
-            background: #fff;
-            width: 90%;
-            max-width: 700px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 4rem;
-            box-shadow: 0 25px 70px rgba(214, 124, 147, 0.2);
-            position: relative;
-            text-align: center;
-            border-radius: 16px;
-            border: 1px solid var(--card-border);
+            background: #fff; width: 90%; max-width: 700px; max-height: 90vh;
+            overflow-y: auto; padding: 4rem; box-shadow: 0 25px 70px rgba(214, 124, 147, 0.2);
+            position: relative; text-align: center; border-radius: 16px; border: 1px solid var(--card-border);
         }
 
-        /* Custom Scrollbar para el modal */
         .modal-content::-webkit-scrollbar { width: 8px; }
         .modal-content::-webkit-scrollbar-track { background: #fff0f4; }
         .modal-content::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 4px;}
 
         .close-modal {
-            position: absolute;
-            top: 25px;
-            right: 35px;
-            font-size: 2.5rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--accent-color);
+            position: absolute; top: 25px; right: 35px; font-size: 2.5rem;
+            cursor: pointer; background: none; border: none; color: var(--accent-color);
             transition: transform 0.3s;
         }
-
         .close-modal:hover { transform: rotate(90deg); }
 
-        .poem-full-title {
-            font-family: var(--font-serif);
-            font-size: 3rem;
-            margin-bottom: 2.5rem;
-            color: var(--accent-color);
-        }
+        .poem-full-title { font-family: var(--font-serif); font-size: 3rem; margin-bottom: 2.5rem; color: var(--accent-color); }
+        .poem-body { font-family: var(--font-serif); font-size: 1.3rem; line-height: 2.2; color: var(--text-color); white-space: pre-wrap; text-align: left; padding: 0 1rem; }
 
-        .poem-body {
-            font-family: var(--font-serif);
-            font-size: 1.3rem;
-            line-height: 2.2;
-            color: var(--text-color);
-            white-space: pre-wrap;
-            text-align: left;
-            padding: 0 1rem;
-        }
-
-        /* Bloqueo Premium */
-        .locked-content {
-            filter: blur(10px);
-            user-select: none;
-            pointer-events: none;
-            opacity: 0.5;
-        }
+        .locked-content { filter: blur(10px); user-select: none; pointer-events: none; opacity: 0.5; }
 
         .pay-wall {
-            position: absolute;
-            top: 55%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            width: 85%;
-            background: rgba(255,255,255,0.95);
-            padding: 3rem 2rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
+            text-align: center; width: 85%; background: rgba(255,255,255,0.95);
+            padding: 3rem 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border: 2px solid var(--accent-color);
         }
 
         .pay-wall h3 { font-family: var(--font-serif); color: var(--accent-color); font-size: 1.8rem; margin-bottom: 1rem;}
 
         .btn-buy {
-            background: var(--accent-color);
-            color: #fff;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 1.5rem;
-            transition: all 0.3s;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(214, 124, 147, 0.4);
+            background: var(--accent-color); color: #fff; border: none; padding: 15px 40px;
+            font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 1.5rem;
+            transition: all 0.3s; border-radius: 50px; box-shadow: 0 5px 15px rgba(214, 124, 147, 0.4);
         }
 
-        .btn-buy:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(214, 124, 147, 0.5);
-        }
+        .btn-buy:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(214, 124, 147, 0.5); }
 
-        /* --- MODAL UPLOAD --- */
-        .form-group {
-            margin-bottom: 1.8rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: var(--text-color);
-        }
+        .form-group { margin-bottom: 1.8rem; text-align: left; }
+        .form-group label { display: block; margin-bottom: 0.8rem; font-weight: 700; font-size: 0.95rem; color: var(--text-color); }
 
         .form-input, .form-textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid var(--card-border);
-            font-family: var(--font-sans);
-            border-radius: 10px;
-            background: #fffbfd;
-            transition: border-color 0.3s;
-            font-size: 1rem;
-            color: var(--text-color);
+            width: 100%; padding: 15px; border: 2px solid var(--card-border);
+            font-family: var(--font-sans); border-radius: 10px; background: #fffbfd;
+            transition: border-color 0.3s; font-size: 1rem; color: var(--text-color);
         }
 
-        .form-input:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            background: #fff;
-        }
+        .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent-color); background: #fff; }
+        .form-textarea { height: 180px; font-family: var(--font-serif); line-height: 1.8; }
 
-        .form-textarea {
-            height: 180px;
-            font-family: var(--font-serif);
-            line-height: 1.8;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #fff0f4;
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        input[type="checkbox"] {
-            accent-color: var(--accent-color);
-            width: 18px; height: 18px;
-        }
+        .checkbox-group { display: flex; align-items: center; gap: 12px; background: #fff0f4; padding: 15px; border-radius: 10px; }
+        input[type="checkbox"] { accent-color: var(--accent-color); width: 18px; height: 18px; }
 
     </style>
 </head>
@@ -431,14 +254,14 @@
 
 <div class="container">
     <div class="grid" id="poetryGrid">
+        <p style="text-align:center; width:100%;">Cargando inspiración...</p>
     </div>
 </div>
 
 <div class="modal-overlay" id="readModal">
     <div class="modal-content">
         <button class="close-modal" onclick="closeModal('readModal')">&times;</button>
-        <div id="modalContent">
-        </div>
+        <div id="modalContent"></div>
     </div>
 </div>
 
@@ -463,41 +286,33 @@
                 <label>Precio ($ USD)</label>
                 <input type="number" id="pPrice" class="form-input" placeholder="Ej: 2.99" step="0.01">
             </div>
-            <button type="submit" class="btn-buy" style="width: 100%; margin-top: 1rem;">Publicar Poema</button>
+            <button type="submit" class="btn-buy" style="width: 100%; margin-top: 1rem;">Publicar en la Nube</button>
         </form>
     </div>
 </div>
 
 <script>
-        // --- DATOS INICIALES (Ejemplos actualizados) ---
-        const defaultPoems = [
-            {
-                id: 1,
-                title: "Bailarina de Porcelana",
-                body: "Giras en la caja de música de mi memoria,\nfrágil, con tu vestido de tul rosa pálido.\nLa melodía se oxida, pero tú sigues intacta,\nen un baile eterno que nunca ha terminado.\n\nMis dedos trazan el borde de tu figura,\ncon miedo a romper lo que ya no existe.\nEres el recuerdo de una dulzura\nque en este mundo gris aún resiste.",
-                premium: false,
-                price: 0
-            },
-            {
-                id: 2,
-                title: "El Color de los Secretos",
-                body: "No es rojo pasión, ni negro luto.\nMis secretos tienen el color del rubor en las mejillas\ncuando se dice una verdad a medias.\n\n(Contenido exclusivo para almas curiosas...)\nEstán guardados en cajones de seda,\nolorosos a lavanda y arrepentimiento.\nSolo quien se atreve a abrir el cerrojo\nconoce el peso real de este sentimiento.",
-                premium: true,
-                price: 2.50
-            },
-            {
-                id: 3,
-                title: "Té de Rosas a Media Tarde",
-                body: "El vapor empaña la ventana,\nmientras el sol de las cinco se rinde.\nBebo despacio la infusión tibia,\ny dejo que el silencio me brinde\nlas respuestas que la mañana me negó.",
-                premium: false,
-                price: 0
+        // --- 1. CONFIGURACIÓN DE CONEXIÓN A JAVA ---
+        const API_URL = "http://localhost:8080/api/poesias";
+        let poems = []; // Aquí guardaremos lo que venga de la base de datos
+
+        // --- 2. FUNCIÓN PARA CARGAR POEMAS (GET) ---
+        async function loadPoems() {
+            try {
+                const response = await fetch(API_URL); // Llama a tu Java Controller
+                if(response.ok) {
+                    poems = await response.json(); // Convierte la respuesta a lista
+                    renderPoems('all'); // Muestra los poemas
+                } else {
+                    console.error("Error al cargar");
+                }
+            } catch (error) {
+                console.error("Error de conexión:", error);
+                document.getElementById('poetryGrid').innerHTML = '<p>No se pudo conectar con el servidor.</p>';
             }
-        ];
+        }
 
-        // Cargar datos
-        let poems = JSON.parse(localStorage.getItem('myPoems')) || defaultPoems;
-
-        // --- RENDERIZADO ---
+        // --- 3. RENDERIZADO (IGUAL QUE ANTES) ---
         const grid = document.getElementById('poetryGrid');
 
         function renderPoems(filter = 'all') {
@@ -508,11 +323,17 @@
                 return true;
             });
 
+            if(filteredPoems.length === 0) {
+                grid.innerHTML = '<p style="text-align:center; color:#999;">Aún no hay poemas en esta categoría.</p>';
+                return;
+            }
+
             filteredPoems.forEach(poem => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.onclick = () => openPoem(poem.id);
-                const snippet = poem.body.split('\n').slice(0, 4).join('\n');
+                // Cortar texto para la vista previa
+                const snippet = poem.body ? poem.body.split('\n').slice(0, 4).join('\n') : "Sin contenido...";
 
                 card.innerHTML = `
                     <div>
@@ -525,23 +346,65 @@
                     </div>
                     <div class="card-footer">
                         <span class="read-btn">Leer versos <i class="fas fa-arrow-right" style="font-size: 0.8rem; margin-left: 5px;"></i></span>
-                        ${poem.premium ? `<span class="price-tag">$${poem.price}</span>` : ''}
+                        ${poem.premium ? `<span class="price-tag"><i class="fas fa-lock"></i></span>` : ''}
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // --- FILTRADO ---
+        // --- 4. FUNCIÓN PARA SUBIR POEMA (POST) ---
+        async function handleUpload(e) {
+            e.preventDefault();
+            const title = document.getElementById('pTitle').value;
+            const body = document.getElementById('pBody').value;
+            const isPremium = document.getElementById('pPremium').checked;
+
+            // Creamos el objeto tal como lo espera Java
+            const newPoem = {
+                title: title,
+                body: body,
+                premium: isPremium,
+                description: "Autor Anónimo" // Campo obligatorio en tu Java, ponemos uno por defecto
+            };
+
+            try {
+                // Enviamos los datos a Java
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newPoem)
+                });
+
+                if (response.ok) {
+                    // Si todo salió bien
+                    document.getElementById('uploadForm').reset();
+                    document.getElementById('priceGroup').style.display = 'none';
+                    closeModal('uploadModal');
+                    loadPoems(); // Recargamos la lista para ver el nuevo poema
+                    alert("¡Poema publicado con éxito!");
+                } else {
+                    alert("Hubo un error al guardar el poema.");
+                }
+            } catch (error) {
+                console.error("Error al subir:", error);
+                alert("Error de conexión con el servidor.");
+            }
+        }
+
+        // --- INTERFAZ (Filtros, Modales) ---
         function filterPoetry(type, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             renderPoems(type);
         }
 
-        // --- MODALES ---
         function openPoem(id) {
             const poem = poems.find(p => p.id === id);
+            if(!poem) return;
+
             const modalContent = document.getElementById('modalContent');
             const overlay = document.getElementById('readModal');
             let contentHtml = '';
@@ -552,12 +415,11 @@
                     <div style="position: relative;">
                         <div class="poem-body locked-content" id="lockedText">
                             ${poem.body}
-                            <br><br>[...Resto del poema oculto...]<br><br>Lorem ipsum dolor sit amet...
                         </div>
                         <div class="pay-wall" id="payWall">
                             <h3><i class="far fa-heart"></i> Contenido Exclusivo</h3>
-                            <p style="color: var(--secondary-color); margin-bottom: 1rem;">Desbloquea este poema para leerlo completo.</p>
-                            <button class="btn-buy" onclick="simulatePayment(event)">Desbloquear por $${poem.price}</button>
+                            <p style="color: var(--secondary-color); margin-bottom: 1rem;">Este poema es especial.</p>
+                            <button class="btn-buy" onclick="simulatePayment(event)">Desbloquear lectura</button>
                         </div>
                     </div>
                 `;
@@ -580,8 +442,11 @@
         function openUploadModal() {
             document.getElementById('uploadModal').classList.add('open');
         }
+        function togglePriceInput() {
+            const isPremium = document.getElementById('pPremium').checked;
+            document.getElementById('priceGroup').style.display = isPremium ? 'block' : 'none';
+        }
 
-        // --- PAGO SIMULADO ---
         window.simulatePayment = function(e) {
             e.stopPropagation();
             const btn = e.target;
@@ -589,39 +454,19 @@
             setTimeout(() => {
                 document.getElementById('payWall').style.display = 'none';
                 document.getElementById('lockedText').classList.remove('locked-content');
-            }, 1500);
+            }, 1000);
         }
-
-        // --- SUBIDA (ADMIN) ---
-        function togglePriceInput() {
-            const isPremium = document.getElementById('pPremium').checked;
-            document.getElementById('priceGroup').style.display = isPremium ? 'block' : 'none';
-        }
-
-        function handleUpload(e) {
-            e.preventDefault();
-            const title = document.getElementById('pTitle').value;
-            const body = document.getElementById('pBody').value;
-            const isPremium = document.getElementById('pPremium').checked;
-            const price = isPremium ? document.getElementById('pPrice').value : 0;
-
-            const newPoem = { id: Date.now(), title, body, premium: isPremium, price };
-            poems.unshift(newPoem);
-            localStorage.setItem('myPoems', JSON.stringify(poems));
-
-            document.getElementById('uploadForm').reset();
-            document.getElementById('priceGroup').style.display = 'none';
-            closeModal('uploadModal');
-            renderPoems('all');
-        }
-
-        renderPoems();
 
         window.onclick = function(event) {
             if (event.target.classList.contains('modal-overlay')) {
                 event.target.classList.remove('open');
             }
         }
+
+        // --- INICIALIZACIÓN ---
+        // Al cargar la página, pedimos los datos a Java
+        loadPoems();
+
     </script>
 </body>
 </html>
