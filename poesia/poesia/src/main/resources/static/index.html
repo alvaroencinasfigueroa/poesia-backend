@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- ESTILOS VISUALES (Mismo diseño rosa) --- */
+        /* --- ESTILOS VISUALES --- */
         :root {
             --bg-color: #fff5f8;
             --text-color: #543d41;
@@ -34,70 +34,16 @@
         }
 
         /* HEADER */
-        header {
-            padding: 2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        header { padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--accent-color); text-decoration: none; cursor: pointer; }
+        .nav-actions { display: flex; gap: 15px; align-items: center; }
 
-        .logo {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .btn-outline:hover {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        .btn-solid {
-            background: var(--accent-color);
-            color: white;
-            border: 2px solid var(--accent-color);
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .btn-solid:hover {
-            background: var(--accent-hover);
-            border-color: var(--accent-hover);
-            transform: translateY(-2px);
-        }
-
-        .user-welcome {
-            font-family: var(--font-serif);
-            font-style: italic;
-            color: var(--text-color);
-            margin-right: 10px;
-        }
+        .btn-outline, .btn-solid { padding: 8px 20px; border-radius: 30px; cursor: pointer; font-weight: 700; transition: all 0.3s; text-decoration: none; font-size: 0.9rem; border: 2px solid var(--accent-color); }
+        .btn-outline { background: transparent; color: var(--accent-color); }
+        .btn-outline:hover { background: var(--accent-color); color: white; }
+        .btn-solid { background: var(--accent-color); color: white; }
+        .btn-solid:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-2px); }
+        .user-welcome { font-family: var(--font-serif); font-style: italic; color: var(--text-color); margin-right: 10px; }
 
         /* RESTO DEL DISEÑO */
         .hero { text-align: center; padding: 4rem 1rem; max-width: 800px; margin: 0 auto; }
@@ -112,10 +58,10 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem 5rem; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 45px; }
 
-        .card { background: var(--card-bg); padding: 2.5rem; border-radius: 12px; box-shadow: var(--card-shadow); transition: all 0.4s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; min-height: 380px; border: 1px solid var(--card-border); }
+        .card { background: var(--card-bg); padding: 2.5rem; border-radius: 12px; box-shadow: var(--card-shadow); transition: all 0.4s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; min-height: 380px; border: 1px solid var(--card-border); position: relative; }
         .card:hover { transform: translateY(-8px); box-shadow: 0 20px 45px rgba(214, 124, 147, 0.25); border-color: #ffd1e0; }
 
-        .card-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--secondary-color); margin-bottom: 1.5rem; display: flex; justify-content: space-between; font-weight: 700; }
+        .card-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--secondary-color); margin-bottom: 1.5rem; display: flex; justify-content: space-between; font-weight: 700; align-items: center; }
         .premium-badge { color: var(--accent-color); background: #fff0f4; padding: 2px 8px; border-radius: 10px; }
         .card h2 { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 1rem; line-height: 1.15; color: var(--text-color); }
         .card-preview { font-family: var(--font-serif); color: #7a676a; font-size: 1.05rem; margin-bottom: 2rem; flex-grow: 1; white-space: pre-line; overflow: hidden; max-height: 160px; position: relative; font-style: italic; }
@@ -123,6 +69,13 @@
         .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--card-border); padding-top: 1.2rem; }
         .read-btn { font-size: 0.9rem; font-weight: 700; color: var(--secondary-color); transition: color 0.3s; }
         .card:hover .read-btn { color: var(--accent-color); }
+
+        /* ESTILO PARA EL BOTÓN DE BORRAR */
+        .delete-btn {
+            background: none; border: none; color: #ffadad;
+            cursor: pointer; font-size: 1.1rem; transition: color 0.3s; z-index: 10;
+        }
+        .delete-btn:hover { color: #d32f2f; }
 
         /* MODALES */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 245, 248, 0.97); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.4s ease; }
@@ -142,7 +95,6 @@
         .poem-full-title { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 2rem; color: var(--accent-color); }
         .poem-body { font-family: var(--font-serif); font-size: 1.2rem; line-height: 2; color: var(--text-color); white-space: pre-wrap; text-align: left; }
         .locked-content { filter: blur(8px); opacity: 0.5; user-select: none; }
-
         .pay-wall { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.95); padding: 2rem; border-radius: 12px; width: 80%; border: 2px solid var(--accent-color); }
     </style>
 </head>
@@ -150,9 +102,7 @@
 
 <header>
     <div class="logo" onclick="renderPoems()"> <i class="fas fa-feather-alt"></i> Anthology.</div>
-
-    <div class="nav-actions" id="navActions">
-    </div>
+    <div class="nav-actions" id="navActions"></div>
 </header>
 
 <section class="hero">
@@ -177,14 +127,8 @@
         <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
         <h2 class="modal-title">Bienvenido de nuevo</h2>
         <form onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="loginEmail" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" id="loginPass" class="form-input" required>
-            </div>
+            <div class="form-group"><label>Email</label><input type="email" id="loginEmail" class="form-input" required></div>
+            <div class="form-group"><label>Contraseña</label><input type="password" id="loginPass" class="form-input" required></div>
             <button type="submit" class="btn-solid" style="width:100%">Entrar</button>
         </form>
         <p style="margin-top:1rem; font-size:0.9rem;">¿No tienes cuenta? <a href="#" onclick="switchModals('loginModal','registerModal')" style="color:var(--accent-color)">Regístrate</a></p>
@@ -196,18 +140,9 @@
         <button class="close-modal" onclick="closeModal('registerModal')">&times;</button>
         <h2 class="modal-title">Crear Cuenta</h2>
         <form onsubmit="handleRegister(event)">
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" id="regName" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="regEmail" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" id="regPass" class="form-input" required>
-            </div>
+            <div class="form-group"><label>Nombre</label><input type="text" id="regName" class="form-input" required></div>
+            <div class="form-group"><label>Email</label><input type="email" id="regEmail" class="form-input" required></div>
+            <div class="form-group"><label>Contraseña</label><input type="password" id="regPass" class="form-input" required></div>
             <button type="submit" class="btn-solid" style="width:100%">Registrarse</button>
         </form>
     </div>
@@ -225,14 +160,8 @@
         <button class="close-modal" onclick="closeModal('uploadModal')">&times;</button>
         <h2 class="modal-title">Publicar Poema</h2>
         <form onsubmit="handleUpload(event)">
-            <div class="form-group">
-                <label>Título</label>
-                <input type="text" id="pTitle" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label>Contenido</label>
-                <textarea id="pBody" class="form-textarea" required></textarea>
-            </div>
+            <div class="form-group"><label>Título</label><input type="text" id="pTitle" class="form-input" required></div>
+            <div class="form-group"><label>Contenido</label><textarea id="pBody" class="form-textarea" required></textarea></div>
             <div class="form-group" style="display:flex; gap:10px; align-items:center;">
                 <input type="checkbox" id="pPremium" style="width:20px; height:20px; accent-color:var(--accent-color);">
                 <label for="pPremium" style="margin:0; cursor:pointer;">¿Es Premium?</label>
@@ -246,9 +175,6 @@
     // --- CONFIGURACIÓN ---
     const API_POEMAS = "http://localhost:8080/api/poesias";
     const API_AUTH = "http://localhost:8080/api/auth";
-
-    // ⚠️ ¡¡CAMBIA ESTO POR TU EMAIL REAL!! ⚠️
-    // Solo este email verá el botón de "Escribir"
     const ADMIN_EMAIL = "alvaro19aef@gmail.com";
 
     let poems = [];
@@ -265,53 +191,27 @@
         };
 
         try {
-            const res = await fetch(`${API_AUTH}/register`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(usuario)
-            });
-            if(res.ok) {
-                alert("¡Cuenta creada! Ahora inicia sesión.");
-                switchModals('registerModal', 'loginModal');
-            } else {
-                alert("Error: El email ya existe o hubo un fallo.");
-            }
+            const res = await fetch(`${API_AUTH}/register`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(usuario) });
+            if(res.ok) { alert("¡Cuenta creada! Ahora inicia sesión."); switchModals('registerModal', 'loginModal'); }
+            else { alert("Error: El email ya existe o hubo un fallo."); }
         } catch(err) { console.error(err); alert("Error de conexión"); }
     }
 
     async function handleLogin(e) {
         e.preventDefault();
-        const credenciales = {
-            email: document.getElementById('loginEmail').value,
-            password: document.getElementById('loginPass').value
-        };
+        const credenciales = { email: document.getElementById('loginEmail').value, password: document.getElementById('loginPass').value };
 
         try {
-            const res = await fetch(`${API_AUTH}/login`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(credenciales)
-            });
-
+            const res = await fetch(`${API_AUTH}/login`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(credenciales) });
             const usuario = await res.json();
-
             if(usuario && usuario.id) {
                 currentUser = usuario;
                 closeModal('loginModal');
                 updateUI();
-                // Mensaje personalizado si eres tú
-                if(currentUser.email === ADMIN_EMAIL){
-                    alert(`¡Bienvenido Poeta! 🖋️`);
-                } else {
-                    alert(`¡Bienvenido, ${currentUser.nombre}!`);
-                }
-            } else {
-                alert("Email o contraseña incorrectos.");
-            }
-        } catch(err) {
-            console.error(err);
-            alert("Credenciales incorrectas.");
-        }
+                if(currentUser.email === ADMIN_EMAIL){ alert(`¡Bienvenido Poeta! 🖋️`); }
+                else { alert(`¡Bienvenido, ${currentUser.nombre}!`); }
+            } else { alert("Email o contraseña incorrectos."); }
+        } catch(err) { console.error(err); alert("Credenciales incorrectas."); }
     }
 
     function logout() {
@@ -326,58 +226,63 @@
             currentUser.premium = true;
             alert("¡Pago exitoso! Ahora eres miembro VIP 🌸");
             closeModal('readModal');
-            updateUI(); // Para mostrar el diamante
+            updateUI();
         }
     }
 
-    // --- INTERFAZ DE USUARIO (LA LOGICA DE PERMISOS) ---
+    // --- INTERFAZ DE USUARIO (UI) ---
 
     function updateUI() {
         const nav = document.getElementById('navActions');
-        nav.innerHTML = ''; // Limpiar
+        nav.innerHTML = '';
 
         if (currentUser) {
-            // -- USUARIO LOGUEADO --
-
-            // 1. Saludo
             let html = `<span class="user-welcome">Hola, ${currentUser.nombre} ${currentUser.premium ? '💎' : ''}</span>`;
-
-            // 2. LA MAGIA: SOLO SI ES EL ADMIN MUESTRA EL BOTÓN DE ESCRIBIR
             if (currentUser.email === ADMIN_EMAIL) {
                 html += `<button class="btn-outline" onclick="openModal('uploadModal')">Escribir</button>`;
             }
-
-            // 3. Botón Salir
             html += `<button class="btn-solid" onclick="logout()">Salir</button>`;
-
             nav.innerHTML = html;
-
         } else {
-            // -- USUARIO NO LOGUEADO (Invitado) --
-            nav.innerHTML = `
-                <button class="btn-outline" onclick="openModal('loginModal')">Entrar</button>
-                <button class="btn-solid" onclick="openModal('registerModal')">Registrarse</button>
-            `;
+            nav.innerHTML = `<button class="btn-outline" onclick="openModal('loginModal')">Entrar</button> <button class="btn-solid" onclick="openModal('registerModal')">Registrarse</button>`;
         }
+        // IMPORTANTE: Recargar poemas para que aparezcan/desaparezcan los botones de borrar
+        renderPoems();
     }
 
-    // --- CARGA DE POEMAS (GET) ---
+    // --- LOGICA DE POEMAS ---
+
     async function loadPoems() {
         try {
             const res = await fetch(API_POEMAS);
-            if(res.ok) {
-                poems = await res.json();
-                renderPoems();
-            }
+            if(res.ok) { poems = await res.json(); renderPoems(); }
         } catch(err) { console.error(err); }
+    }
+
+    // *** NUEVA FUNCIÓN DE ELIMINAR ***
+    async function deletePoem(event, id) {
+        event.stopPropagation(); // Evita que se abra el modal de lectura
+        if(!confirm("¿Estás seguro de que quieres eliminar este poema para siempre?")) return;
+
+        try {
+            const res = await fetch(`${API_POEMAS}/${id}`, { method: 'DELETE' });
+            if(res.ok) {
+                alert("Poema eliminado.");
+                loadPoems(); // Recarga la lista
+            } else {
+                alert("Error al eliminar.");
+            }
+        } catch(e) { console.error(e); }
     }
 
     function renderPoems(filter = 'all') {
         const grid = document.getElementById('poetryGrid');
         grid.innerHTML = '';
 
+        // Verificamos si es admin para mostrar el botón de basura
+        const isAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
+
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        // (Nota: aquí deberíamos actualizar el botón activo visualmente, pero lo simplificamos)
 
         const filtered = poems.filter(p => {
             if (filter === 'free') return !p.premium;
@@ -395,12 +300,16 @@
             card.onclick = () => openPoem(poem.id);
             const snippet = poem.body ? poem.body.substring(0, 100).replace(/\n/g, ' ') : "";
 
+            // HTML del botón borrar (solo si es admin)
+            const deleteHtml = isAdmin
+                ? `<button class="delete-btn" onclick="deletePoem(event, ${poem.id})" title="Eliminar Poema"><i class="fas fa-trash-alt"></i></button>`
+                : '';
+
             card.innerHTML = `
                 <div>
                     <div class="card-tag">
-                        <span>Poesía</span>
-                        ${poem.premium ? '<span class="premium-badge"><i class="fas fa-heart"></i> Premium</span>' : '<span>Gratis</span>'}
-                    </div>
+                        <span>${poem.premium ? '<span class="premium-badge"><i class="fas fa-heart"></i> Premium</span>' : 'Gratis'}</span>
+                        ${deleteHtml} </div>
                     <h2>${poem.title}</h2>
                     <div class="card-preview">${snippet}...</div>
                 </div>
@@ -413,88 +322,44 @@
         });
     }
 
-    // --- ABRIR POEMA (LÓGICA DE BLOQUEO) ---
+    // --- ABRIR POEMA ---
     function openPoem(id) {
         const poem = poems.find(p => p.id === id);
         if(!poem) return;
 
         const modalContent = document.getElementById('modalContent');
+        const isUserAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
         let html = '';
 
-        // Reglas:
-        // 1. El ADMIN (Tú) siempre ve todo.
-        // 2. Si es GRATIS, todos ven todo.
-        // 3. Si es PREMIUM, necesitas estar logueado Y haber pagado.
-
-        const isUserAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
-
         if (isUserAdmin || !poem.premium) {
-            // Caso: Eres el jefe O el poema es gratis
             html = buildPoemHtml(poem.title, poem.body);
         } else {
-            // Caso: Poema Premium para mortales
             if (!currentUser) {
-                // No logueado
                 html = buildLockedHtml(poem.title, poem.body, "Inicia sesión para leer este poema exclusivo.", "openModal('loginModal'); closeModal('readModal')","Iniciar Sesión");
             } else if (!currentUser.premium) {
-                // Logueado sin pagar
                 html = buildLockedHtml(poem.title, poem.body, "Este contenido es para miembros VIP.", "upgradeUser()", "Hacerme Premium ($5)");
             } else {
-                // Logueado y pagó
                 html = buildPoemHtml(poem.title, poem.body);
             }
         }
-
         modalContent.innerHTML = html;
         openModal('readModal');
     }
 
     function buildPoemHtml(title, body) {
-        return `
-            <h1 class="poem-full-title">${title}</h1>
-            <div class="poem-body">${body}</div>
-            <div style="margin-top:3rem; color:var(--accent-color); opacity:0.6"><i class="fas fa-seedling"></i></div>
-        `;
+        return `<h1 class="poem-full-title">${title}</h1><div class="poem-body">${body}</div><div style="margin-top:3rem; color:var(--accent-color); opacity:0.6"><i class="fas fa-seedling"></i></div>`;
     }
 
     function buildLockedHtml(title, body, msg, action, btnText) {
-        return `
-            <h1 class="poem-full-title"><i class="fas fa-lock" style="opacity:0.5"></i> ${title}</h1>
-            <div style="position: relative;">
-                <div class="poem-body locked-content">
-                    ${body.substring(0, 50)}... <br><br>
-                    (El resto del poema se desvanece en la niebla...)
-                </div>
-                <div class="pay-wall">
-                    <h3>Contenido Exclusivo</h3>
-                    <p style="margin-bottom:1rem; color:var(--secondary-color)">${msg}</p>
-                    <button class="btn-solid" onclick="${action}">${btnText}</button>
-                </div>
-            </div>
-        `;
+        return `<h1 class="poem-full-title"><i class="fas fa-lock" style="opacity:0.5"></i> ${title}</h1><div style="position: relative;"><div class="poem-body locked-content">${body.substring(0, 50)}... <br><br>(El resto se desvanece...)</div><div class="pay-wall"><h3>Contenido Exclusivo</h3><p style="margin-bottom:1rem; color:var(--secondary-color)">${msg}</p><button class="btn-solid" onclick="${action}">${btnText}</button></div></div>`;
     }
 
     // --- SUBIDA (POST) ---
     async function handleUpload(e) {
         e.preventDefault();
-        const poem = {
-            title: document.getElementById('pTitle').value,
-            body: document.getElementById('pBody').value,
-            premium: document.getElementById('pPremium').checked,
-            description: "Anon"
-        };
-
-        await fetch(API_POEMAS, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(poem)
-        });
-
-        closeModal('uploadModal');
-        document.getElementById('pTitle').value = "";
-        document.getElementById('pBody').value = "";
-        loadPoems();
-        alert("Publicado con éxito");
+        const poem = { title: document.getElementById('pTitle').value, body: document.getElementById('pBody').value, premium: document.getElementById('pPremium').checked, description: "Anon" };
+        await fetch(API_POEMAS, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(poem) });
+        closeModal('uploadModal'); document.getElementById('pTitle').value = ""; document.getElementById('pBody').value = ""; loadPoems(); alert("Publicado con éxito");
     }
 
     // --- UTILIDADES ---
@@ -502,11 +367,7 @@
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
     function switchModals(closeId, openId) { closeModal(closeId); openModal(openId); }
     window.onclick = (e) => { if(e.target.classList.contains('modal-overlay')) e.target.classList.remove('open'); }
-    function filterPoetry(type, btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderPoems(type);
-    }
+    function filterPoetry(type, btn) { document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderPoems(type); }
 
     // --- INICIO ---
     updateUI();
