@@ -180,6 +180,21 @@
     let poems = [];
     let currentUser = null;
 
+    // --- 1. RECUPERAR SESIÓN AL CARGAR (NUEVO) ---
+    // Esto se ejecuta apenas carga la página
+    function initSession() {
+        const storedUser = localStorage.getItem('versos_user'); // Buscamos si hay algo guardado
+        if (storedUser) {
+            try {
+                currentUser = JSON.parse(storedUser); // Recuperamos el usuario
+                console.log("Sesión restaurada para:", currentUser.nombre);
+            } catch (e) {
+                console.error("Error al restaurar sesión", e);
+                localStorage.removeItem('versos_user'); // Si está corrupto, lo borramos
+            }
+        }
+    }
+
     // --- FUNCIONES DE AUTENTICACIÓN ---
 
     async function handleRegister(e) {
@@ -203,9 +218,14 @@
 
         try {
             const res = await fetch(`${API_AUTH}/login`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(credenciales) });
-            const usuario = await res.json();
+            const usuario = await res.json(); // Se espera que el backend devuelva el objeto usuario completo (con id, nombre, etc.)
+
             if(usuario && usuario.id) {
                 currentUser = usuario;
+
+                // --- 2. GUARDAR SESIÓN (NUEVO) ---
+                localStorage.setItem('versos_user', JSON.stringify(currentUser));
+
                 closeModal('loginModal');
                 updateUI();
                 if(currentUser.email === ADMIN_EMAIL){ alert(`¡Bienvenido Poeta! 🖋️`); }
@@ -216,14 +236,24 @@
 
     function logout() {
         currentUser = null;
+
+        // --- 3. BORRAR SESIÓN (NUEVO) ---
+        localStorage.removeItem('versos_user');
+
         updateUI();
         alert("Has cerrado sesión.");
     }
 
     function upgradeUser() {
         if(!currentUser) return;
+        // Simulamos el pago
         if(confirm(`Hola ${currentUser.nombre}, ¿quieres pagar $5 USD para ser Premium?`)) {
             currentUser.premium = true;
+
+            // --- 4. ACTUALIZAR SESIÓN (NUEVO) ---
+            // Si cambia su estado a Premium, debemos actualizar el localStorage también
+            localStorage.setItem('versos_user', JSON.stringify(currentUser));
+
             alert("¡Pago exitoso! Ahora eres miembro VIP 🌸");
             closeModal('readModal');
             updateUI();
@@ -246,8 +276,7 @@
         } else {
             nav.innerHTML = `<button class="btn-outline" onclick="openModal('loginModal')">Entrar</button> <button class="btn-solid" onclick="openModal('registerModal')">Registrarse</button>`;
         }
-        // IMPORTANTE: Recargar poemas para que aparezcan/desaparezcan los botones de borrar
-        renderPoems();
+        renderPoems(); // Recargar poemas para ver botones de borrar o candados abiertos
     }
 
     // --- LOGICA DE POEMAS ---
@@ -259,16 +288,15 @@
         } catch(err) { console.error(err); }
     }
 
-    // *** NUEVA FUNCIÓN DE ELIMINAR ***
     async function deletePoem(event, id) {
-        event.stopPropagation(); // Evita que se abra el modal de lectura
+        event.stopPropagation();
         if(!confirm("¿Estás seguro de que quieres eliminar este poema para siempre?")) return;
 
         try {
             const res = await fetch(`${API_POEMAS}/${id}`, { method: 'DELETE' });
             if(res.ok) {
                 alert("Poema eliminado.");
-                loadPoems(); // Recarga la lista
+                loadPoems();
             } else {
                 alert("Error al eliminar.");
             }
@@ -279,7 +307,6 @@
         const grid = document.getElementById('poetryGrid');
         grid.innerHTML = '';
 
-        // Verificamos si es admin para mostrar el botón de basura
         const isAdmin = currentUser && currentUser.email === ADMIN_EMAIL;
 
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -300,7 +327,6 @@
             card.onclick = () => openPoem(poem.id);
             const snippet = poem.body ? poem.body.substring(0, 100).replace(/\n/g, ' ') : "";
 
-            // HTML del botón borrar (solo si es admin)
             const deleteHtml = isAdmin
                 ? `<button class="delete-btn" onclick="deletePoem(event, ${poem.id})" title="Eliminar Poema"><i class="fas fa-trash-alt"></i></button>`
                 : '';
@@ -370,8 +396,9 @@
     function filterPoetry(type, btn) { document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderPoems(type); }
 
     // --- INICIO ---
-    updateUI();
-    loadPoems();
+    initSession(); // <--- 1. Ejecutar esto primero
+    updateUI();    // <--- 2. Actualizar la interfaz
+    loadPoems();   // <--- 3. Cargar poemas
 </script>
 
 </body>
