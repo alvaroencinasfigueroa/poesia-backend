@@ -2,7 +2,11 @@ package com.poesia.poesia.controller;
 
 import com.poesia.poesia.entity.Usuario;
 import com.poesia.poesia.repository.UsuarioRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,27 +17,42 @@ public class AuthController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    // REGISTRO: Crear un usuario nuevo
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @PostMapping("/register")
-    public Usuario register(@RequestBody Usuario usuario) {
-        // Por defecto, nadie nace siendo Premium (tienen que pagar después)
+    public ResponseEntity<?> register(@Valid @RequestBody Usuario usuario) {
+        if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("El email ya está registrado");
+        }
+
         usuario.setPremium(false);
-        return usuarioRepository.save(usuario);
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+        return ResponseEntity.ok(usuarioRepository.save(usuario));
     }
 
-    // LOGIN: Comprobar si email y contraseña coinciden
     @PostMapping("/login")
-    public Usuario login(@RequestBody Usuario loginRequest) {
-        // 1. Buscamos al usuario por su email
+    public ResponseEntity<?> login(@RequestBody Usuario loginRequest) {
         Usuario usuarioEncontrado = usuarioRepository.findByEmail(loginRequest.getEmail())
                 .orElse(null);
 
-        // 2. Si existe Y la contraseña coincide, lo dejamos pasar
-        if (usuarioEncontrado != null && usuarioEncontrado.getPassword().equals(loginRequest.getPassword())) {
-            return usuarioEncontrado;
+        if (usuarioEncontrado != null &&
+                passwordEncoder.matches(loginRequest.getPassword(), usuarioEncontrado.getPassword())) {
+            return ResponseEntity.ok(usuarioEncontrado);
         }
 
-        // 3. Si no, devolvemos null (o podríamos lanzar error)
-        return null;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body("Credenciales incorrectas");
+    }
+
+    @PatchMapping("/upgrade/{id}")
+    public ResponseEntity<?> upgradeToPremium(@PathVariable Long id) {
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        if (usuario != null) {
+            usuario.setPremium(true);
+            return ResponseEntity.ok(usuarioRepository.save(usuario));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Usuario no encontrado");
     }
 }
